@@ -3,8 +3,8 @@ import Mailgun from 'mailgun.js';
 
 const mailgun = new Mailgun(formData);
 const domain = 'autovalid.tech';
-const key = `key-a6941833d5355f903f4de2a20230178b`
-const from = 'Valid <noreply@autovalid.tech>'
+const key = ``
+const from = ''
 const mg = mailgun.client({ username: 'api', key: key});
 
 export const sendEmailVerification = async (recipient, codeKey) => {
