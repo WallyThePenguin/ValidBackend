@@ -1,0 +1,32 @@
+{
+  "name": "validbackend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.14.1",
+    "bcrypt": "^5.1.0",
+    "cloudinary": "^1.37.3",
+    "crypto": "^1.0.1",
+    "express": "^4.18.2",
+    "formdata": "^0.10.4",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^9.0.0",
+    "mailgun.js": "^9.1.2",
+    "morgan": "^1.10.0",
+    "throttled-queue": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.17",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}

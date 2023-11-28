@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "client2"
+}
+
+datasource db {
+    provider = "sqlserver"
+    url      = env("DATABASE2_URL")
+}
+
+model Employee {
+    id          Int     @id @default(autoincrement())
+    rating      String  @default("0")
+    phonenumber String  @unique
+    pverify     Boolean @default(false)
+    email       String  @unique
+    everify     Boolean @default(false)
+    DOB         String
+    ssn         String
+    ssncheck    Boolean @default(false)
+    name        String
+    password    String
+}

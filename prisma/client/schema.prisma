@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "client"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Request {
+  //Idenfication
+  id         Int       @id @default(autoincrement())
+  //Created at
+  createdAt  DateTime  @default(now())
+  //Last updated to the request
+  updatedAt  DateTime? @updatedAt
+  //Location of the request
+  location   String
+  //Type of Car Wash
+  type       String
+  //Price of the car wash
+  price      String
+  //Owner Object
+  owner      User      @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  //Owner ID
+  ownerId    Int
+  //Employee Object
+  employee   Employee  @relation(fields: [employeeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  //Employee ID
+  employeeId Int
+  //Car Object
+  car        Car       @relation(fields: [carId], references: [id])
+  //Car ID
+  carId      Int
+  //Is the Request finished?
+  finished   Boolean   @default(false)
+  //Is the Request Cancelled?
+  cancelled  Boolean   @default(false)
+  //How was the rating based on customer response.
+  rating     String?
+}
+
+model Car {
+  id      Int       @id @default(autoincrement())
+  owner   User      @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  make    String
+  model   String
+  year    Int
+  color   String
+  plateNo Int
+  request Request[]
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  phonenumber String
+  pverify     Boolean   @default(false)
+  email       String    @unique
+  everify     Boolean   @default(false)
+  //Verification codes get stored here.
+  code        String?
+  //Expiration time of codes
+  expiry      DateTime?
+  name        String?
+  password    String
+  request     Request[]
+  car         Car[]
+}
+
+model Employee {
+  id          Int       @id @default(autoincrement())
+  phonenumber String    @unique
+  email       String    @unique
+  rating      String    @default("0")
+  name        String
+  password    String
+  working     Boolean   @default(false)
+  deployed    Boolean   @default(false)
+  location    String?
+  request     Request[]
+}
